@@ -1,0 +1,40 @@
+<div class="container">
+  <h1 class="my-4"><%= @experiment.title %></h1>
+  <p><%= @experiment.instructions %></p>
+
+  <div class="progress mb-4">
+    <div class="progress-bar" role="progressbar" style="width: <%= @experiment.progress_for(current_user) %>%;" aria-valuenow="<%= @experiment.progress_for(current_user) %>" aria-valuemin="0" aria-valuemax="100">
+      <%= @experiment.progress_for(current_user) %>%
+    </div>
+  </div>
+
+  <% if @experiment.completed_by?(current_user) %>
+    <p><strong>This experiment is completed.</strong></p>
+  <% end %>
+
+  <h2>Questions</h2>
+  <% if @questions.any? %>
+    <div class="list-group mb-4">
+      <% @questions.each do |question| %>
+        <div class="list-group-item">
+          <p><strong><%= question.content %></strong></p>
+          <% if question.completed_by?(current_user) %>
+            <p><strong>Completed on <%= question.completion_time(current_user).strftime('%Y-%m-%d %H:%M:%S') %></strong></p>
+            <p>Congratulations! The correct answer was: <%= question.answer_choices.find_by(correct: true).content %></p>
+          <% else %>
+            <% question.answer_choices.each do |choice| %>
+              <%= button_to choice.content, experiment_question_answers_path(@experiment, question, answer_choice_id: choice.id), method: :post, class: 'btn btn-secondary mb-2' %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No questions available for this experiment.</p>
+  <% end %>
+
+  <div class="d-flex justify-content-between">
+    <%= link_to 'Back to Lesson', course_lesson_path(@experiment.lesson.course, @experiment.lesson), class: 'btn btn-secondary' %>
+    <%= link_to 'Back to Course', course_path(@experiment.lesson.course), class: 'btn btn-secondary' %>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+  <h1 class="my-4">Available Courses</h1>
+  <div class="row">
+    <% @courses.each do |course| %>
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to course.title, course_path(course) %></h5>
+            <p class="card-text"><%= course.description %></p>
+            <% unless current_user.enrolled_in?(course) %>
+              <%= button_to 'Enroll', enrollments_path(course_id: course.id), method: :post, class: 'btn btn-primary' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
