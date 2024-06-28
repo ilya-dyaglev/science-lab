@@ -8,6 +8,8 @@
     </div>
   </div>
 
+  <%= render 'lab' %>
+
   <% if @experiment.completed_by?(current_user) %>
     <p><strong>This experiment is completed.</strong></p>
   <% end %>

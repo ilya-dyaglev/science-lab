@@ -1,5 +1,8 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import "@hotwired/turbo-rails"
-import "controllers"
-import "@popperjs/core"
-import "bootstrap"
+import { Application } from "@hotwired/stimulus"
+import { registerControllers } from "./register_controllers"
+
+// Start the Stimulus application
+const application = Application.start()
+
+// Register controllers
+registerControllers(application)

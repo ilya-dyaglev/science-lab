@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :enrollments, only: [:create, :destroy]
 
   resources :experiments, only: [:show] do
+    collection do
+      post :combine
+    end
     resources :questions, only: [] do
       resources :answers, only: [:create]
     end
