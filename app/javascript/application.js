@@ -1,8 +1,11 @@
 import { Application } from "@hotwired/stimulus"
-import { registerControllers } from "./register_controllers"
+import LabController from "./controllers/lab_controller"
+import ApplicationController from "./controllers/application_controller"
+
 
 // Start the Stimulus application
 const application = Application.start()
 
 // Register controllers
-registerControllers(application)
+application.register("lab", LabController)
+application.register("application", ApplicationController)
