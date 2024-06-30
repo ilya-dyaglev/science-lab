@@ -1,7 +1,5 @@
-import { Application } from "@hotwired/stimulus"
-import LabController from "./lab_controller"
-import ApplicationController from "./application_controller"
+import { application } from "controllers/application"
 
-const application = Application.start()
-application.register("lab", LabController)
-application.register("application", ApplicationController)
+// Eager load all controllers defined in the import map under controllers/**/*_controller
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
+eagerLoadControllersFrom("controllers", application)
