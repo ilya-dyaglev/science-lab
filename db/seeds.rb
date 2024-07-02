@@ -1,8 +1,9 @@
 puts "Deleting all existing data..."
-AnswerChoice.delete_all
 Answer.delete_all
+AnswerChoice.delete_all
 Question.delete_all
 Experiment.delete_all
+UserLessonCompletion.delete_all
 Lesson.delete_all
 Enrollment.delete_all
 Course.delete_all
@@ -10,6 +11,8 @@ UserBadge.delete_all
 Badge.delete_all
 Xp.delete_all
 User.delete_all
+ReactionElement.delete_all
+Element.delete_all
 
 puts "Creating new data..."
 
@@ -61,6 +64,48 @@ experiments = [
 experiments.each do |experiment_attrs|
   lesson = Lesson.find_by(title: experiment_attrs[:lesson_title])
   Experiment.create!(lesson: lesson, title: experiment_attrs[:title], instructions: experiment_attrs[:instructions])
+end
+
+puts 'Creating elements...'
+elements = [
+  { name: 'Hydrogen', symbol: 'H', atomic_number: 1, atomic_weight: 1.008, period: 1, group: 1, category: 'Nonmetal', state_at_room_temp: 1, density: 0.00008988, melting_point: -259.14, boiling_point: -252.87 },
+  { name: 'Helium', symbol: 'He', atomic_number: 2, atomic_weight: 4.002602, period: 1, group: 18, category: 'Noble Gas', state_at_room_temp: 1, density: 0.0001785, melting_point: -272.20, boiling_point: -268.93 },
+  { name: 'Carbon', symbol: 'C', atomic_number: 6, atomic_weight: 12.011, period: 2, group: 14, category: 'Nonmetal', state_at_room_temp: 2, density: 2.267, melting_point: 3550, boiling_point: 4027 },
+  { name: 'Oxygen', symbol: 'O', atomic_number: 8, atomic_weight: 15.999, period: 2, group: 16, category: 'Nonmetal', state_at_room_temp: 1, density: 0.001429, melting_point: -218.79, boiling_point: -182.95 }
+]
+
+elements.each do |element_attrs|
+  Element.create!(element_attrs)
+end
+
+puts 'Creating reactions...'
+reactions = [
+  { name: 'Water Formation', description: 'Hydrogen reacts with oxygen to form water.' },
+  { name: 'Carbon Dioxide Formation', description: 'Carbon reacts with oxygen to form carbon dioxide.' }
+]
+
+reactions.each do |reaction_attrs|
+  Reaction.create!(reaction_attrs)
+end
+
+puts 'Creating reaction elements...'
+reaction_elements = [
+  { reaction_name: 'Water Formation', element_symbol: 'H', role: 'Reactant', quantity: 2.0 },
+  { reaction_name: 'Water Formation', element_symbol: 'O', role: 'Reactant', quantity: 1.0 },
+  { reaction_name: 'Water Formation', element_symbol: 'H2O', role: 'Product', quantity: 1.0 },
+  { reaction_name: 'Carbon Dioxide Formation', element_symbol: 'C', role: 'Reactant', quantity: 1.0 },
+  { reaction_name: 'Carbon Dioxide Formation', element_symbol: 'O', role: 'Reactant', quantity: 2.0 },
+  { reaction_name: 'Carbon Dioxide Formation', element_symbol: 'CO2', role: 'Product', quantity: 1.0 }
+]
+
+reaction_elements.each do |re_attrs|
+  reaction = Reaction.find_by(name: re_attrs[:reaction_name])
+  element = Element.find_by(symbol: re_attrs[:element_symbol])
+  if element.nil?
+    puts "Element not found: #{re_attrs[:element_symbol]}"
+  else
+    ReactionElement.create!(reaction: reaction, element: element, role: re_attrs[:role], quantity: re_attrs[:quantity])
+  end
 end
 
 puts 'Creating questions and answer choices...'
