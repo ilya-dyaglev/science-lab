@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'badges/index'
   root to: 'home#index'
   devise_for :users
 

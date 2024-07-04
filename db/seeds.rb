@@ -206,3 +206,15 @@ create_question_with_choices(experiment11, 'What were the results of the electro
   { content: 'Produced carbon dioxide.', correct: false },
   { content: 'Produced nitrogen gas.', correct: false }
 ])
+
+Badge.create([
+  { title: "New Genius", description: "Congratulations, you have completed your first lesson! Keep it up.", image: File.open(Rails.root.join("app/assets/images/badges/badge1.png")) },
+  { title: "Atomic Models", description: "You have learnt more about.", image: File.open(Rails.root.join("app/assets/images/badges/badge2.png")) },
+  { title: "Expert Scientist", description: "Awarded to scientists who complete 10 courses with distinction.", image: File.open(Rails.root.join("app/assets/images/badges/badge3.png")) },
+  { title: "New Genius", description: "Congratulations, you have completed your first lesson! Keep it up.", image: File.open(Rails.root.join("app/assets/images/badges/badge4.png")) },
+  { title: "Atomic Models", description: "You have learnt more about.", image: File.open(Rails.root.join("app/assets/images/badges/badge5.png")) },
+  { title: "Expert Scientist", description: "Awarded to scientists who complete 10 courses with distinction.", image: File.open(Rails.root.join("app/assets/images/badges/badge6.png")) },
+  { title: "CHEMISTRY 101 WIZARD", description: "Congratulations, you have completed your first lesson! Keep it up.", image: File.open(Rails.root.join("app/assets/images/badges/badge7.png")) }
+])
+
+puts "Badges seeded successfully!"
