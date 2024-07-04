@@ -7,8 +7,23 @@
     <%= f.error_notification %>
 
     <div class="form-group">
+      <%= f.label :name, class: 'control-label' %>
+      <%= f.input_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :surname, class: 'control-label' %>
+      <%= f.input_field :surname, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :email, class: 'control-label' %>
       <%= f.input_field :email, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :bio, "About Me", class: 'control-label' %>
+      <%= f.input_field :bio, class: 'form-control' %>
     </div>
 
     <div class="form-group">
