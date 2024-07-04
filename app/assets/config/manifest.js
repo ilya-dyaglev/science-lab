@@ -4,14 +4,3 @@
 //= link_tree ../../../vendor/javascript .js
 //= link popper.js
 //= link bootstrap.min.js
-//= link avatar1.png
-//= link avatar2.png
-//= link avatar3.png
-//= link avatar4.png
-//= link avatar5.png
-//= link avatar6.png
-//= link avatar7.png
-//= link avatar8.png
-//= link avatar9.png
-//= link avatar10.png
-//= link avatar11.png
