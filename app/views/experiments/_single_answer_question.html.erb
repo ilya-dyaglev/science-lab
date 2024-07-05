@@ -1,0 +1,11 @@
+<div class="list-group-item">
+  <p><strong><%= question.content %></strong></p>
+  <% if question.completed_by?(current_user) %>
+    <p><strong>Completed on <%= question.completion_time(current_user).strftime('%Y-%m-%d %H:%M:%S') %></strong></p>
+    <p>Congratulations! The correct answer was: <%= question.answer_choices.find_by(correct: true).content %></p>
+  <% else %>
+    <% question.answer_choices.each do |choice| %>
+      <%= button_to choice.content, experiment_question_answers_path(@experiment, question, answer_choice_id: choice.id), method: :post, class: 'btn btn-secondary mb-2' %>
+    <% end %>
+  <% end %>
+</div>

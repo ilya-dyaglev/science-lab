@@ -3,7 +3,7 @@
   <p><%= @course.description %></p>
 
   <div class="progress mb-4">
-    <div class="progress-bar" role="progressbar" style="width: <%= @course.progress_for(current_user) %>%;" aria-valuenow="<%= @course.progress_for(current_user) %>" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%= @course.progress_for(current_user) %>%;" aria-valuenow="<%= @course.progress_for(current_user) %>" aria-valuemin="0" aria-valuemax="100">
       <%= @course.progress_for(current_user) %>%
     </div>
   </div>

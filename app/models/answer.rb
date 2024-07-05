@@ -1,7 +1,7 @@
 class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
-  belongs_to :answer_choice
+  belongs_to :answer_choice, optional: true
 
-  validates :is_correct, inclusion: { in: [true, false] }
+  validates :content, presence: true, if: -> { answer_choice.nil? }
 end
