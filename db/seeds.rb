@@ -110,12 +110,31 @@ end
 
 puts 'Creating questions and answer choices...'
 
-def create_question_with_choices(experiment, content, choices)
-  question = Question.create!(experiment: experiment, content: content)
+def create_single_choice_question(experiment, content, choices)
+  question = Question.create!(experiment: experiment, content: content, question_type: 'single_choice')
   choices.each do |choice|
     AnswerChoice.create!(question: question, content: choice[:content], correct: choice[:correct])
   end
-  question
+end
+
+def create_multiple_choice_question(experiment, content, choices)
+  question = Question.create!(experiment: experiment, content: content, question_type: 'multiple_choice', options: choices.map { |c| c[:content] }, correct_option: choices.select { |c| c[:correct] }.map { |c| c[:content] }.join(','))
+  choices.each do |choice|
+    AnswerChoice.create!(question: question, content: choice[:content], correct: choice[:correct])
+  end
+end
+
+def create_word_bank_question(experiment, content, options_with_correctness)
+  options = options_with_correctness.map { |o| o[:content] }
+  correct_options = options_with_correctness.select { |o| o[:correct] }.map { |o| o[:content] }
+  
+  Question.create!(
+    experiment: experiment,
+    content: content,
+    question_type: 'word_bank',
+    options: options,
+    correct_option: correct_options.join(',')
+  )
 end
 
 experiment1 = Experiment.find_by(title: 'Experiment 1: Simple Chemical Reaction')
@@ -130,79 +149,111 @@ experiment9 = Experiment.find_by(title: 'Experiment 9: Acid-Base Titration')
 experiment10 = Experiment.find_by(title: 'Experiment 10: Heat Measurement')
 experiment11 = Experiment.find_by(title: 'Experiment 11: Electrolysis')
 
-create_question_with_choices(experiment1, 'What happens when substance A is mixed with substance B?', [
+gen_single_choice = [
   { content: 'It produces a gas.', correct: true },
   { content: 'It produces a liquid.', correct: false },
   { content: 'Nothing happens.', correct: false },
   { content: 'It produces a solid.', correct: false }
-])
+]
 
-create_question_with_choices(experiment2, 'What is the atomic number of the atom model you built?', [
-  { content: '8', correct: true },
-  { content: '6', correct: false },
-  { content: '10', correct: false },
-  { content: '12', correct: false }
-])
+gen_multi_choice = [
+  { content: '1 (Hydrogen)', correct: true },
+  { content: '2 (Helium)', correct: true },
+  { content: '6 (Carbon)', correct: true },
+  { content: '7 (Nitrogen)', correct: false }
+]
 
-create_question_with_choices(experiment3, 'What is the symbol for element X in the periodic table?', [
-  { content: 'O', correct: true },
-  { content: 'C', correct: false },
-  { content: 'N', correct: false },
-  { content: 'H', correct: false }
-])
+gen_word_bank = [
+    { content: 'H', correct: true },
+    { content: 'He', correct: true },
+    { content: 'C', correct: true },
+    { content: 'O', correct: true }
+]
 
-create_question_with_choices(experiment4, 'What type of bond is found in compound Y?', [
+create_single_choice_question(experiment1, 'What happens when substance A is mixed with substance B?', gen_single_choice)
+
+create_multiple_choice_question(experiment1, 'Select the correct atomic numbers for the given elements.',gen_multi_choice)
+
+create_word_bank_question(
+  experiment1,
+  'Fill in the blanks with the correct element symbols. (Hint: Hydrogen, Helium, Carbon, Oxygen)',
+  gen_word_bank
+)
+
+create_single_choice_question(experiment2, 'What happens when substance A is mixed with substance B?', gen_single_choice)
+
+create_multiple_choice_question(experiment2, 'Select the correct atomic numbers for the given elements.',gen_multi_choice)
+
+create_word_bank_question(
+  experiment2,
+  'Fill in the blanks with the correct element symbols. (Hint: Hydrogen, Helium, Carbon, Oxygen)',
+  gen_word_bank
+)
+
+create_single_choice_question(experiment3, 'What happens when substance A is mixed with substance B?', gen_single_choice)
+
+create_multiple_choice_question(experiment3, 'Select the correct atomic numbers for the given elements.',gen_multi_choice)
+
+create_word_bank_question(
+  experiment3,
+  'Fill in the blanks with the correct element symbols. (Hint: Hydrogen, Helium, Carbon, Oxygen)',
+  gen_word_bank
+)
+
+create_single_choice_question(experiment4, 'What type of bond is found in compound Y?', [
   { content: 'Ionic bond.', correct: true },
   { content: 'Covalent bond.', correct: false },
   { content: 'Metallic bond.', correct: false },
   { content: 'Hydrogen bond.', correct: false }
 ])
 
-create_question_with_choices(experiment5, 'What state changes did you observe during the experiment?', [
+create_single_choice_question(experiment5, 'What state changes did you observe during the experiment?', [
   { content: 'Solid to liquid.', correct: true },
   { content: 'Liquid to gas.', correct: false },
   { content: 'Gas to liquid.', correct: false },
   { content: 'Solid to gas.', correct: false }
 ])
 
-create_question_with_choices(experiment6, 'What are the properties of the solution you prepared?', [
+create_single_choice_question(experiment6, 'What are the properties of the solution you prepared?', [
   { content: 'It is a clear solution.', correct: true },
   { content: 'It is a cloudy solution.', correct: false },
   { content: 'It is a colored solution.', correct: false },
   { content: 'It is a suspension.', correct: false }
 ])
 
-create_question_with_choices(experiment7, 'How does temperature affect the reaction rate of substance C and D?', [
+create_single_choice_question(experiment7, 'How does temperature affect the reaction rate of substance C and D?', [
   { content: 'The reaction rate increases with temperature.', correct: true },
   { content: 'The reaction rate decreases with temperature.', correct: false },
   { content: 'The reaction rate stays the same.', correct: false },
   { content: 'The reaction rate first increases then decreases.', correct: false }
 ])
 
-create_question_with_choices(experiment8, 'Name the hydrocarbons identified in the experiment.', [
+create_single_choice_question(experiment8, 'Name the hydrocarbons identified in the experiment.', [
   { content: 'Methane, Ethane, Propane', correct: true },
   { content: 'Methane, Ethene, Propyne', correct: false },
   { content: 'Methane, Ethanol, Propane', correct: false },
   { content: 'Methane, Ethane, Propanol', correct: false }
 ])
 
-create_question_with_choices(experiment9, 'What was the concentration of the acid/base after titration?', [
+create_single_choice_question(experiment9, 'What was the concentration of the acid/base after titration?', [
   { content: '0.1 M', correct: true },
   { content: '0.5 M', correct: false },
   { content: '1.0 M', correct: false },
   { content: '2.0 M', correct: false }
 ])
 
-create_question_with_choices(experiment10, 'What was the heat change measured during the reaction?', [
+create_single_choice_question(experiment10, 'What was the heat change measured during the reaction?', [
   { content: '5 kJ', correct: true },
   { content: '10 kJ', correct: false },
   { content: '15 kJ', correct: false },
   { content: '20 kJ', correct: false }
 ])
 
-create_question_with_choices(experiment11, 'What were the results of the electrolysis experiment?', [
+create_single_choice_question(experiment11, 'What were the results of the electrolysis experiment?', [
   { content: 'Produced hydrogen gas.', correct: true },
   { content: 'Produced oxygen gas.', correct: false },
   { content: 'Produced carbon dioxide.', correct: false },
   { content: 'Produced nitrogen gas.', correct: false }
 ])
+
+puts "Seeding completed"

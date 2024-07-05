@@ -1,9 +1,10 @@
+<!-- app/views/experiments/show.html.erb -->
 <div class="container">
   <h1 class="my-4"><%= @experiment.title %></h1>
   <p><%= @experiment.instructions %></p>
 
   <div class="progress mb-4">
-    <div class="progress-bar" role="progressbar" style="width: <%= @experiment.progress_for(current_user) %>%;" aria-valuenow="<%= @experiment.progress_for(current_user) %>" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%= @experiment.progress_for(current_user) %>%;" aria-valuenow="<%= @experiment.progress_for(current_user) %>" aria-valuemin="0" aria-valuemax="100">
       <%= @experiment.progress_for(current_user) %>%
     </div>
   </div>
@@ -18,17 +19,16 @@
   <% if @questions.any? %>
     <div class="list-group mb-4">
       <% @questions.each do |question| %>
-        <div class="list-group-item">
-          <p><strong><%= question.content %></strong></p>
-          <% if question.completed_by?(current_user) %>
-            <p><strong>Completed on <%= question.completion_time(current_user).strftime('%Y-%m-%d %H:%M:%S') %></strong></p>
-            <p>Congratulations! The correct answer was: <%= question.answer_choices.find_by(correct: true).content %></p>
-          <% else %>
-            <% question.answer_choices.each do |choice| %>
-              <%= button_to choice.content, experiment_question_answers_path(@experiment, question, answer_choice_id: choice.id), method: :post, class: 'btn btn-secondary mb-2' %>
-            <% end %>
-          <% end %>
-        </div>
+        <% case question.question_type %>
+        <% when 'single_choice' %>
+          <%= render 'single_answer_question', question: question %>
+        <% when 'multiple_choice' %>
+          <%= render 'multiple_choice_question', question: question %>
+        <% when 'word_bank' %>
+          <%= render 'word_bank_question', question: question %>
+        <% else %>
+          <p>Unknown question type.</p>
+        <% end %>
       <% end %>
     </div>
   <% else %>
