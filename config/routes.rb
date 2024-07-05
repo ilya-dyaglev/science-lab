@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  get 'badges/index'
   root to: 'home#index'
   devise_for :users
+
+  get 'profile', to: 'users#profile', as: 'user_profile'
 
   resources :courses, only: [:index, :show] do
     resources :lessons, only: [:show]

@@ -256,4 +256,30 @@ create_single_choice_question(experiment11, 'What were the results of the electr
   { content: 'Produced nitrogen gas.', correct: false }
 ])
 
+badges = Badge.create!([
+  { title: "New Genius", description: "Congratulations, you have completed your first lesson! Keep it up.", image: File.open(Rails.root.join("app/assets/images/badges/badge1.png")) },
+  { title: "Atomic Models", description: "You have learnt more about atomic models.", image: File.open(Rails.root.join("app/assets/images/badges/badge2.png")) },
+  { title: "Expert Scientist", description: "Awarded to scientists who complete 10 courses with distinction.", image: File.open(Rails.root.join("app/assets/images/badges/badge3.png")) },
+  { title: "Chemistry 101 Wizard", description: "You have completed your first chemistry lesson! Keep it up.", image: File.open(Rails.root.join("app/assets/images/badges/badge4.png")) },
+  { title: "Physics Prodigy", description: "You have mastered the basics of physics.", image: File.open(Rails.root.join("app/assets/images/badges/badge5.png")) },
+  { title: "Biology Buff", description: "You have shown exceptional understanding in biology.", image: File.open(Rails.root.join("app/assets/images/badges/badge6.png")) },
+  { title: "Mathematics Marvel", description: "You have excelled in mathematics lessons.", image: File.open(Rails.root.join("app/assets/images/badges/badge7.png")) }
+])
+
+puts "Badges seeded successfully!"
+
+lessons_titles_to_badges = {
+  'Chemistry Basics' => badges[0],
+  'Atoms and Molecules' => badges[1],
+  'Periodic Table' => badges[2],
+  'Chemical Bonds' => badges[3],
+  'States of Matter' => badges[4],
+  'Solutions and Mixtures' => badges[5]
+}
+
+lessons_titles_to_badges.each do |lesson_title, badge|
+  lesson = Lesson.find_by(title: lesson_title)
+  lesson.update(badge: badge) if lesson
+end
+
 puts "Seeding completed"
