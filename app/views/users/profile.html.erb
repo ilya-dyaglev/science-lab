@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       <div class="large-avatar-container mb-3">
-        <%= image_tag @user.avatar.presence || asset_path("avatar3.png"), id: "largeAvatar", class: "large-avatar img-fluid rounded-circle mb-3"%>
+        <%= image_tag @user.avatar.presence || asset_path("avatar3.png"), id: "largeAvatar", class: "large-avatar img-fluid rounded-circle mb-3" %>
       </div>
 
       <div class="card profile-card">
@@ -22,6 +22,24 @@
             </ul>
           <% else %>
             <p>No courses enrolled yet.</p>
+          <% end %>
+
+          <% if @badges.present? %>
+            <p><strong>Your Badges:</strong></p>
+            <div class="row">
+              <% @badges.each do |badge| %>
+                <div class="col-md-4 mb-4">
+                  <div class="card badge-card">
+                    <div class="card-body text-center">
+                      <%= image_tag badge.image, class: "badge-image img-fluid mb-2" if badge.image.attached? %>
+                      <h5 class="card-title badge-title"><%= badge.title %></h5>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p>No badges collected yet.</p>
           <% end %>
 
           <%= link_to edit_user_registration_path, class: "btn btn-primary mt-3" do %>

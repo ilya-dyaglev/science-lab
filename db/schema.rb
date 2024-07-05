@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_04_201416) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_05_084524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -128,6 +128,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_04_201416) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "badge_id"
+    t.index ["badge_id"], name: "index_lessons_on_badge_id"
     t.index ["course_id"], name: "index_lessons_on_course_id"
   end
 
@@ -162,6 +164,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_04_201416) do
     t.bigint "badge_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "awarded_at"
     t.index ["badge_id"], name: "index_user_badges_on_badge_id"
     t.index ["user_id"], name: "index_user_badges_on_user_id"
   end
@@ -221,6 +224,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_04_201416) do
   add_foreign_key "experiment_results", "experiments"
   add_foreign_key "experiment_results", "users"
   add_foreign_key "experiments", "lessons"
+  add_foreign_key "lessons", "badges"
   add_foreign_key "lessons", "courses"
   add_foreign_key "questions", "experiments"
   add_foreign_key "reaction_elements", "elements"
