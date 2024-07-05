@@ -1,5 +1,6 @@
 class Course < ApplicationRecord
   has_many :lessons, dependent: :destroy
+  has_many :users, through: :enrollments
   has_many :enrollments
 
   def completed_by?(user)
