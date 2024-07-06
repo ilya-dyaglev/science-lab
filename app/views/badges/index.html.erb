@@ -8,7 +8,7 @@
           <div class="card-body">
             <h5 class="card-title"><%= badge.title %></h5>
             <p class="card-text"><%= badge.description %></p>
-            <%= image_tag badge.image, class: "lrg-badge-image" if badge.image.attached? %>
+            <%= image_tag badge.image_url, class: "lrg-badge-image" if badge.image_url.present? %>
           </div>
         </div>
       </div>
