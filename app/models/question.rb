@@ -20,8 +20,13 @@ class Question < ApplicationRecord
   end
 
   def validate_options
-    if multiple_choice? || word_bank?
-      erros.add(:options, "can't be blank") if options.blank?
+    if question_type == 'multiple_choice' || question_type == 'word_bank'
+      if options.blank?
+        errors.add(:options, "can't be blank")
+      end
+      if correct_option.blank?
+        errors.add(:correct_option, "can't be blank")
+      end
     end
   end
 end
