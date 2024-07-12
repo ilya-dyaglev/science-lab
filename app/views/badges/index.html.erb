@@ -1,14 +1,13 @@
 <div class="container">
   <h1 class="my-4">Badges</h1>
 
-  <div class="row">
+  <div class="row badges-container">
     <% @badges.each do |badge| %>
-      <div class="col-md-4 mb-4">
-        <div class="card">
+      <div class="col-6 col-md-3 mb-4">
+        <div class="card text-center">
+          <%= image_tag badge.image_url, alt: badge.title, class: "lrg-badge-image" if badge.image_url.present? %>
           <div class="card-body">
             <h5 class="card-title"><%= badge.title %></h5>
-            <p class="card-text"><%= badge.description %></p>
-            <%= image_tag badge.image_url, class: "lrg-badge-image" if badge.image_url.present? %>
           </div>
         </div>
       </div>

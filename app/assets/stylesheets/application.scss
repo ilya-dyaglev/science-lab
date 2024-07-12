@@ -1,18 +1,14 @@
-// Graphical variables
-@import "config/fonts";
-@import "config/colors";
-@import "config/bootstrap_variables";
-
-// External libraries
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 @import "bootstrap";
-@import "font-awesome";
-
-// Your CSS partials
-@import "components/index";
-@import "components/navbar";
-@import "pages/index";
-@import "pages/home";
-@import "pages/profile";
-@import "pages/badge";
-@import "custom";
-@import "components/lab";
+@import "variables";
+@import "components/global";
+@import "components/header";
+@import "components/sidebar";
+@import "components/footer";
+@import "components/main_content";
+@import "components/reactions";
+@import "components/elements";
+@import "components/badges";
+@import "loader";
+@import "components/auth";
+@import "components/reactions";

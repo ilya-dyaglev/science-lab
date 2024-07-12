@@ -1,0 +1,22 @@
+<div class="content-header text-center mb-4">
+  <h1>Chemical Reaction</h1>
+  <p>Test your knowledge of chemical reactions with this fun and interactive simulation.</p>
+</div>
+
+<div class="row elements-container">
+  <% @elements.each do |element| %>
+    <div class="col-6 col-md-3 mb-4">
+      <div class="card text-center">
+        <%= image_tag element.image_url, alt: element.name, class: "card-img-top" if element.image_url.present? %>
+        <div class="card-body">
+          <h5 class="card-title"><%= element.name %></h5>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="d-flex justify-content-between mt-4">
+  <button class="btn btn-secondary">Clear</button>
+  <button class="btn btn-primary">Submit</button>
+</div>

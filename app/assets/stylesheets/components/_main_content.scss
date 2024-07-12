@@ -1,0 +1,34 @@
+@import '../variables';
+
+.main-content {
+  margin-left: 200px; /* Align with sidebar width */
+  margin-top: $header-height; /* Height of header */
+  padding: 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+  font-family: 'Space Grotesk', sans-serif;
+  display: flex;
+  justify-content: center;
+
+  .content {
+    padding-bottom: 40px; /* Height of footer */
+
+    width: 80%;
+    .content-header {
+      margin-bottom: 20px;
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: auto;
+    }
+
+    .dropzone {
+      background-color: $background-color;
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

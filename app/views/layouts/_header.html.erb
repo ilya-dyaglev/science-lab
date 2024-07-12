@@ -1,0 +1,20 @@
+<div class="header-content">
+  <div class="left-block d-flex align-items-center">
+    <!-- <img src="path_to_logo_image" alt="Logo" class="logo"> -->
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H12L10 6L12 12H0L2 6L0 0Z" fill="#170D1C"/>
+    </svg>
+    <h1 class="ml-3">Science Lab</h1>
+  </div>
+  <% if user_signed_in? %>
+    <div class="xp-bar-container d-flex align-items-center">
+      <span class="xp-label">XP Points</span>
+      <div class="progress-wrapper">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="progress-data">500/1000 XP</div>
+      </div>
+    </div>
+  <% end %>
+</div>

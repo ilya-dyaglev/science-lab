@@ -1,0 +1,22 @@
+@import '../variables';
+
+.footer {
+  width: 100%;
+  height: $footer-height;
+  background-color: $header-footer-bg-color;
+  color: $text-color;
+  font-weight: 700;
+  font-family: $font-family;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  .footer-content {
+    text-align: center;
+    width: 100%;
+  }
+}

@@ -1,0 +1,56 @@
+.reactions-container {
+  .card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+
+    .card-img-top {
+      width: 100%;
+      height: 150px; // Fixed height for images
+      object-fit: cover; // Ensure the image covers the area without distortion
+      transition: filter 0.3s ease; // Smooth transition for hover effect
+
+      &:hover {
+        filter: brightness(70%); // Slight shadow effect
+        cursor: pointer; // Change cursor to pointer on hover
+      }
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #ffffff;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+
+      .card-title {
+        margin: 0;
+      }
+    }
+
+    &:hover .card-body {
+      opacity: 1; // Show title and description on hover
+      cursor: pointer; // Change cursor to pointer on hover
+    }
+  }
+}
+
+.modal-body ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modal-body ul li {
+  margin-bottom: 10px;
+}

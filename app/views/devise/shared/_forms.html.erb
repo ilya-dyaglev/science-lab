@@ -1,0 +1,7 @@
+<div class="authentication-container">
+  <% if controller_name == 'sessions' %>
+    <%= render '../sessions/new' %>
+  <% elsif controller_name == 'registrations' %>
+    <%= render 'devise/registrations/new' %>
+  <% end %>
+</div>

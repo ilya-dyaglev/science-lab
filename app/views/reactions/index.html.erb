@@ -1,0 +1,39 @@
+<div data-controller="reaction">
+  <div class="content-header text-center mb-4">
+    <h1>Chemical Reactions</h1>
+    <p>Test your knowledge of chemical reactions with this fun and interactive simulation.</p>
+  </div>
+
+  <div class="row reactions-container">
+    <% @reactions.each do |reaction| %>
+      <div class="col-6 col-md-3 mb-4">
+        <div class="card text-center reaction-card" data-reaction-id="<%= reaction.id %>" data-reaction-target="reactionCard">
+          <%= image_tag reaction.image_url, alt: reaction.name, class: "card-img-top" if reaction.image_url.present? %>
+          <div class="card-body">
+            <h5 class="card-title"><%= reaction.name %></h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- Modal Structure -->
+<div class="modal fade" id="reactionElementsModal" tabindex="-1" role="dialog" aria-labelledby="reactionElementsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reactionElementsModalLabel">Reaction Elements</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" data-reaction-target="reactionElementsContainer">
+        <!-- Elements will be dynamically inserted here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

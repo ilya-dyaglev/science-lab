@@ -1,0 +1,78 @@
+@import '../variables';
+
+.header {
+  width: 100%;
+  height: $header-height;
+  background-color: $header-footer-bg-color;
+  color: $text-color;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    // width: calc(100% - #{sidebar-width} - 40px);
+  }
+
+  .left-block {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    height: $logo-height; /* Adjust based on your logo size */
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 18px;
+    line-height: $header-height; /* To align vertically within the header */
+  }
+
+  .xp-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: calc(100% - 200px); /* Sidebar width considered */
+    white-space: nowrap;
+  }
+
+  .xp-label {
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: 450;
+  }
+
+  .progress-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .progress {
+    width: 100%;
+    height: 10px; /* Adjust this value to make the progress bar thinner */
+    background-color: $xp-bar-bg-color;
+    border-radius: 5px; /* Adjust this value to keep the border-radius proportionate */
+    overflow: hidden;
+    margin-right: 10px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background-color: $xp-bar-fill-color;
+  }
+
+  .progress-data {
+    white-space: nowrap;
+    font-size:14px;
+    color: $font-accent;
+  }
+}

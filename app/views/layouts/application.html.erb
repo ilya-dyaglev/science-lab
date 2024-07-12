@@ -12,8 +12,29 @@
   </head>
 
   <body>
-    <%= render "shared/navbar" %>
-    <%= render "shared/flashes" %>
-    <%= yield %>
-  </body>
+  
+  <%= render 'shared/loader' %>
+  <div class="app-container">
+    <header class="header">
+      <%= render 'layouts/header' %>
+    </header>
+
+    <aside class="sidebar">
+      <%= render 'layouts/sidebar' %>
+    </aside>
+
+    <div class="main-content">
+      <main class="content">
+        <%= yield %>
+      </main>
+
+    </div>
+    <footer class="footer">
+      <%= render 'layouts/footer' %>
+    </footer>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
 </html>
