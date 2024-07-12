@@ -120,7 +120,7 @@ reaction_elements_data = [
 
 def create_reaction_elements(reaction_elements_data)
   reaction_elements_data.each do |data|
-    reaction = Reaction.find_by(symbol: data[:reaction_name])
+    reaction = Reaction.find_by(name: data[:reaction_name])
     element = Element.find_by(symbol: data[:element_symbol])
 
     if reaction.nil?
